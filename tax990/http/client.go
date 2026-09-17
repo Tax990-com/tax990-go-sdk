@@ -12,7 +12,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/tax990/sdk-go/tax990/errors"
+	apierrors "github.com/tax990/sdk-go/tax990/errors"
 	"github.com/tax990/sdk-go/tax990/models"
 )
 

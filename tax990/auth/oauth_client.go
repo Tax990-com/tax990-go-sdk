@@ -1,4 +1,4 @@
-// Package auth implements the Tax990 two-step OAuth token flow from ANALYSIS.md.
+// Package auth implements the Tax990 two-step OAuth token flow.
 package auth
 
 import (
@@ -36,7 +36,7 @@ func NewOAuthClient(http *httpclient.Client, clientID, clientSecret, userToken s
 }
 
 // SignJWSLocally produces a HS256 JWT using the ClientSecret.
-// Claims per ANALYSIS.md: iss=clientId, sub=clientId, aud=userToken, iat=now.
+// Claims: iss=clientId, sub=clientId, aud=userToken, iat=now.
 func (c *OAuthClient) SignJWSLocally() string {
 	headerJSON := `{"alg":"HS256","typ":"JWT"}`
 	headerEncoded := base64.RawURLEncoding.EncodeToString([]byte(headerJSON))

@@ -27,8 +27,7 @@ type ApiResponse[S any, E any] struct {
 }
 
 // PaginatedResponse is a generic paginated result container.
-// Per ANALYSIS.md, the current API does not paginate — this type is provided
-// for forward compatibility only.
+// The current API does not paginate — this type is provided for forward compatibility only.
 type PaginatedResponse[T any] struct {
 	Items      []T
 	TotalCount int

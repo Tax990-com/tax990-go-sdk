@@ -1,7 +1,10 @@
 // Package tax990 is the entry point for the Tax990 Go SDK.
 package tax990
 
-import "time"
+import (
+	"os"
+	"time"
+)
 
 // Environment selects the API deployment target.
 type Environment string
@@ -32,23 +35,10 @@ type Config struct {
 	Timeout time.Duration
 }
 
-var environmentURLs = map[Environment]struct{ APIUrl, OAuthUrl string }{
-	Production: {APIUrl: "https://api.tax990.com", OAuthUrl: "https://oauth.tax990.com"},
-	Sandbox:    {APIUrl: "http://localhost:9005", OAuthUrl: "http://localhost:4000"},
-}
-
 // resolveURLs returns the effective API and OAuth base URLs for the config.
 func (c *Config) resolveURLs() (apiURL, oauthURL string) {
-	env := c.Environment
-	if env == "" {
-		env = Sandbox
-	}
-	defaults, ok := environmentURLs[env]
-	if !ok {
-		defaults = environmentURLs[Sandbox]
-	}
-	apiURL = defaults.APIUrl
-	oauthURL = defaults.OAuthUrl
+	apiURL = os.Getenv("TAX990_API_URL")
+	oauthURL = os.Getenv("TAX990_OAUTH_URL")
 	if c.APIUrl != "" {
 		apiURL = c.APIUrl
 	}

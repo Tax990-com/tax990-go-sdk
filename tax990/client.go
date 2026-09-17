@@ -29,6 +29,12 @@ type Tax990Client struct {
 	// FilingStatus wraps the /status endpoint for IRS acknowledgement queries.
 	FilingStatus resources.FilingStatusResource
 
+	// Utility provides utility endpoints for ID lookups and system health checks.
+	Utility resources.UtilityResource
+
+	// Nonprofits provides nonprofit organization detail lookups by EIN.
+	Nonprofits resources.NonprofitsResource
+
 	// Webhooks is a stub — webhook endpoints are not yet in the Public API.
 	Webhooks resources.WebhookResource
 
@@ -76,6 +82,8 @@ func NewClient(cfg Config) (*Tax990Client, error) {
 		Form990N:      resources.NewForm990N(apiHTTP),
 		Organizations: resources.NewOrganization(apiHTTP),
 		FilingStatus:  resources.NewFilingStatus(apiHTTP),
+		Utility:       resources.NewUtility(apiHTTP),
+		Nonprofits:    resources.NewNonprofits(apiHTTP),
 		Webhooks:      resources.NewWebhook(),
 		ApiKeys:       resources.NewApiKeys(),
 	}, nil
